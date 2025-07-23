@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import instance from "../utils/axios"; // Adjust the import path as needed
+import instance from "../utils/axios";
+import DarkAuroraBackground from "../components/animations/DarkAuroraBackground";
+import ShinyText from "../components/animations/ShinyText";
 
 const departments = [
   "CSE", "ECE", "EEE", "Mech", "Civil", "Chemical", "MME", "Mining", "ARCH"
@@ -21,7 +23,6 @@ const Register = () => {
 
   const validate = () => {
     const newErrors = {};
-
     if (!form.name.trim()) newErrors.name = "Name is required";
 
     if (!form.email.endsWith("@students.vnit.ac.in")) {
@@ -54,161 +55,178 @@ const Register = () => {
     setErrors({ ...errors, [e.target.name]: "" });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (validate()) {
-    try {
-      const res = await instance.post("/user/register", {
-        name: form.name,
-        email: form.email,
-        password: form.password,
-        enrollmentNumber: form.enrollment,
-        department: form.department,
-        passOutYear: form.passoutYear
-      });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validate()) {
+      try {
+        const res = await instance.post("/user/register", {
+          name: form.name,
+          email: form.email,
+          password: form.password,
+          enrollmentNumber: form.enrollment,
+          department: form.department,
+          passOutYear: form.passoutYear
+        });
 
-      console.log("Registration successful:", res.data);
-      navigate("/login");
-    } catch (error) {
-      console.error("Registration error:", error);
-      alert(error?.response?.data?.message || "Something went wrong!");
+        console.log("Registration successful:", res.data);
+        navigate("/login");
+      } catch (error) {
+        console.error("Registration error:", error);
+        alert(error?.response?.data?.message || "Something went wrong!");
+      }
     }
-  }
-};
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-blue-50 p-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-md p-8 space-y-6">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-blue-600">Create an Account</h2>
-          <p className="text-sm text-gray-600">Join InterviewExperiences as a VNIT student</p>
-        </div>
+    <DarkAuroraBackground>
+      <div className="min-h-screen flex items-center justify-center px-4 py-12">
+        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg w-full max-w-lg p-8 text-white">
+          <h2 className="text-3xl font-bold text-center mb-6">
+            <ShinyText speed={2}>Create an Account</ShinyText>
+          </h2>
+          <p className="text-center text-sm text-gray-300 mb-4">
+            Join the VNIT Project Repository ProLab
+          </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              className={`w-full mt-1 p-2 border rounded focus:outline-none ${
-                errors.name ? "border-red-500" : "border-gray-300"
-              }`}
-              placeholder="Your full name"
-              required
-            />
-            {errors.name && <p className="text-sm text-red-600">{errors.name}</p>}
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Name */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Name</label>
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                className={`w-full p-2 bg-transparent border ${
+                  errors.name ? "border-red-500" : "border-white/30"
+                } rounded text-white placeholder:text-gray-300 focus:outline-none`}
+                placeholder="Your full name"
+                required
+              />
+              {errors.name && <p className="text-sm text-red-400 mt-1">{errors.name}</p>}
+            </div>
 
-          {/* Email */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">VNIT Email</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className={`w-full mt-1 p-2 border rounded focus:outline-none ${
-                errors.email ? "border-red-500" : "border-gray-300"
-              }`}
-              placeholder="example@vnit.ac.in"
-              required
-            />
-            {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
-          </div>
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-medium mb-1">VNIT Email</label>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                className={`w-full p-2 bg-transparent border ${
+                  errors.email ? "border-red-500" : "border-white/30"
+                } rounded text-white placeholder:text-gray-300 focus:outline-none`}
+                placeholder="example@students.vnit.ac.in"
+                required
+              />
+              {errors.email && <p className="text-sm text-red-400 mt-1">{errors.email}</p>}
+            </div>
 
-          {/* Password */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              className={`w-full mt-1 p-2 border rounded focus:outline-none ${
-                errors.password ? "border-red-500" : "border-gray-300"
-              }`}
-              placeholder="Minimum 6 characters"
-              required
-            />
-            {errors.password && <p className="text-sm text-red-600">{errors.password}</p>}
-          </div>
+            {/* Password */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Password</label>
+              <input
+                type="password"
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                className={`w-full p-2 bg-transparent border ${
+                  errors.password ? "border-red-500" : "border-white/30"
+                } rounded text-white placeholder:text-gray-300 focus:outline-none`}
+                placeholder="Minimum 6 characters"
+                required
+              />
+              {errors.password && <p className="text-sm text-red-400 mt-1">{errors.password}</p>}
+            </div>
 
-          {/* Enrollment Number */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Enrollment Number</label>
-            <input
-              type="text"
-              name="enrollment"
-              value={form.enrollment}
-              onChange={handleChange}
-              className={`w-full mt-1 p-2 border rounded focus:outline-none ${
-                errors.enrollment ? "border-red-500" : "border-gray-300"
-              }`}
-              placeholder="e.g. B21CS123"
-              required
-            />
-            {errors.enrollment && <p className="text-sm text-red-600">{errors.enrollment}</p>}
-          </div>
+            {/* Enrollment */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Enrollment Number</label>
+              <input
+                type="text"
+                name="enrollment"
+                value={form.enrollment}
+                onChange={handleChange}
+                className={`w-full p-2 bg-transparent border ${
+                  errors.enrollment ? "border-red-500" : "border-white/30"
+                } rounded text-white placeholder:text-gray-300 focus:outline-none`}
+                placeholder="e.g. B21CS123"
+                required
+              />
+              {errors.enrollment && (
+                <p className="text-sm text-red-400 mt-1">{errors.enrollment}</p>
+              )}
+            </div>
 
-          {/* Department */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Department</label>
-            <select
-              name="department"
-              value={form.department}
-              onChange={handleChange}
-              className={`w-full mt-1 p-2 border rounded focus:outline-none ${
-                errors.department ? "border-red-500" : "border-gray-300"
-              }`}
-              required
-            >
-              <option value="">Select department</option>
-              {departments.map((dept) => (
-                <option key={dept} value={dept}>
-                  {dept}
+            {/* Department */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Department</label>
+              <select
+                name="department"
+                value={form.department}
+                onChange={handleChange}
+                className={`w-full p-2 bg-transparent border ${
+                  errors.department ? "border-red-500" : "border-white/30"
+                } rounded text-white focus:outline-none appearance-none`}
+                required
+              >
+                <option value="" disabled className="bg-[#1c1c2c] text-white">
+                  Select department
                 </option>
-              ))}
-            </select>
-            {errors.department && <p className="text-sm text-red-600">{errors.department}</p>}
+                {departments.map((dept) => (
+                  <option
+                    key={dept}
+                    value={dept}
+                    className="bg-[#1c1c2c] text-white"
+                  >
+                    {dept}
+                  </option>
+                ))}
+              </select>
+              {errors.department && (
+                <p className="text-sm text-red-400 mt-1">{errors.department}</p>
+              )}
+            </div>
+
+            {/* Passout Year */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Passout Year</label>
+              <input
+                type="number"
+                name="passoutYear"
+                value={form.passoutYear}
+                onChange={handleChange}
+                max={2030}
+                className={`w-full p-2 bg-transparent border ${
+                  errors.passoutYear ? "border-red-500" : "border-white/30"
+                } rounded text-white placeholder:text-gray-300 focus:outline-none`}
+                placeholder="e.g. 2026"
+                required
+              />
+              {errors.passoutYear && (
+                <p className="text-sm text-red-400 mt-1">{errors.passoutYear}</p>
+              )}
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold py-2.5 rounded hover:scale-[1.02] transition duration-200"
+            >
+              Sign Up
+            </button>
+          </form>
+
+          <div className="text-center text-sm text-gray-300 mt-4">
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-400 hover:underline font-medium">
+              Login here
+            </Link>
           </div>
-
-          {/* Passout Year */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Passout Year</label>
-            <input
-              type="number"
-              name="passoutYear"
-              value={form.passoutYear}
-              onChange={handleChange}
-              className={`w-full mt-1 p-2 border rounded focus:outline-none ${
-                errors.passoutYear ? "border-red-500" : "border-gray-300"
-              }`}
-              placeholder="e.g. 2026"
-              required
-              max={2030}
-            />
-            {errors.passoutYear && <p className="text-sm text-red-600">{errors.passoutYear}</p>}
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-2.5 rounded hover:scale-[1.02] transition transform duration-200"
-          >
-            Sign Up
-          </button>
-        </form>
-
-        <div className="text-center text-sm text-gray-600">
-          Already have an account?{" "}
-          <Link to="/login" className="text-blue-600 hover:underline font-medium">
-            Login here
-          </Link>
         </div>
       </div>
-    </div>
+    </DarkAuroraBackground>
   );
 };
 

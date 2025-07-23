@@ -1,101 +1,79 @@
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-
-// const Home = () => {
-//   const navigate = useNavigate();
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 flex flex-col">
-//       {/* Hero Section */}
-//       <header className="text-center py-20 px-4">
-//         <h1 className="text-5xl font-extrabold text-indigo-700">
-//           InterviewExperiences
-//         </h1>
-//         <p className="mt-4 text-lg text-gray-700 max-w-2xl mx-auto">
-//           Your peer-driven platform to read and share interview journeys, strategies, and success stories. Built by students, for students.
-//         </p>
-//         <div className="mt-8 flex justify-center gap-4 flex-wrap">
-//           <button
-//             onClick={() => navigate("/blogs")}
-//             className="bg-indigo-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-indigo-700 transition-all"
-//           >
-//             Explore Experiences
-//           </button>
-//           <button
-//             onClick={() => navigate("/write")}
-//             className="bg-white border border-indigo-600 text-indigo-600 px-6 py-3 rounded-xl font-medium hover:bg-indigo-50 transition-all"
-//           >
-//             Share Yours
-//           </button>
-//         </div>
-//       </header>
-
-//       {/* Mission Section */}
-//       <section className="bg-white py-12 px-6">
-//         <div className="max-w-4xl mx-auto text-center">
-//           <h2 className="text-2xl font-bold text-gray-800">🎯 Our Mission</h2>
-//           <p className="mt-4 text-gray-600">
-//             To empower every VNIT student with real, relatable interview experiences and prep tips. We believe in learning from peers, reducing anxiety, and increasing placement confidence through shared stories.
-//           </p>
-//         </div>
-//       </section>
-
-//       {/* Developer Section */}
-//       <section className="bg-indigo-100 py-10 px-6 text-center">
-//         <h3 className="text-xl font-semibold text-indigo-700">👨‍💻 Built by Rohit Singh Naruka</h3>
-//         <p className="mt-2 text-gray-700 max-w-2xl mx-auto">
-//           Pre-final-year B.Tech ECE student at VNIT. I built InterviewExperiences to simplify the placement journey for juniors and peers — inspired by the stories we share over chai & samosa at Chandu.
-//         </p>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default Home;
-
-
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import ShinyText from "../components/animations/ShinyText";
+import DarkAuroraBackground from "../components/animations/DarkAuroraBackground";
+import { Rocket, Plus } from "lucide-react";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  }),
+};
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-50 flex flex-col items-center justify-center text-center px-6">
-      {/* App Title */}
-      <h1 className="text-4xl md:text-5xl font-bold text-indigo-800 mb-3">
-        Interview Experiences
-      </h1>
-
-      {/* Tagline */}
-      <p className="text-lg md:text-xl text-gray-700 font-medium mb-1">
-        Exclusively for VNIT Students
-      </p>
-
-      {/* Description */}
-      <p className="text-base md:text-lg text-gray-600 max-w-2xl mb-8">
-        Discover real interview stories shared by your seniors and peers at VNIT.
-        Whether you're preparing for internships, placements, or government jobs — read,
-        learn, and share your journey!
-      </p>
-
-      {/* Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        <button
-          onClick={() => navigate("/blogs")}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-xl shadow-md transition"
+    <DarkAuroraBackground>
+      <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 text-white">
+        <motion.h1
+          className="text-4xl md:text-5xl font-bold mb-2 tracking-tight"
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
         >
-          📖 Read Blogs
-        </button>
-        <button
-          onClick={() => navigate("/write")}
-          className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-xl shadow-md transition"
+          <ShinyText speed={2.5}>VNIT Project Repository</ShinyText>
+        </motion.h1>
+
+        <motion.p
+          className="text-xl font-medium text-blue-300 mb-3"
+          custom={1}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
         >
-          ✍️ Write Blog
-        </button>
+          Share and Explore Projects by VNITians
+        </motion.p>
+
+        <motion.p
+          className="text-base md:text-lg text-purple-300 max-w-3xl leading-relaxed mb-8"
+          custom={2}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+        >
+          Browse through amazing academic and personal projects built by VNIT students.
+          <br className="hidden sm:block" />
+          Discover innovative ideas, learn from others, or contribute your own work
+          to inspire the community.
+        </motion.p>
+
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4"
+          custom={3}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+        >
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-blue-300 hover:text-white font-semibold py-2 px-6 rounded-xl shadow-md transition backdrop-blur-md"
+          >
+            <Rocket size={18} />
+            <span className="text-sm sm:text-base">Explore Projects</span>
+          </button>
+
+        </motion.div>
       </div>
-    </div>
+    </DarkAuroraBackground>
   );
 };
 
-export default Home;
+export default Home; 

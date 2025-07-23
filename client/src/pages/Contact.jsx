@@ -1,46 +1,87 @@
 import React from "react";
+import { Mail, Github, Linkedin } from "lucide-react";
+import { motion } from "framer-motion";
+import DarkAuroraBackground from "../components/animations/DarkAuroraBackground";
+import ShinyText from "../components/animations/ShinyText";
+import { useNavigate } from "react-router-dom";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  }),
+};
 
 const Contact = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white text-gray-800 p-6">
-      <div className="max-w-xl text-center space-y-6">
-        <h1 className="text-3xl font-bold">Contact Me</h1>
-
-        <p className="text-lg">
-          Feel free to reach out to me via email or connect through social platforms.
-        </p>
-
-        <div className="space-y-2 text-base">
-          <p>Email 1: <a href="mailto:rohitnaruka6852@gmail.com" className="text-blue-600 underline">rohitnaruka6852@gmail.com</a></p>
-          <p>Email 2: <a href="mailto:bt23ece047@students.vnit.ac.in" className="text-blue-600 underline">bt23ece047@students.vnit.ac.in</a></p>
-        </div>
-
-        <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4">
-          <a
-            href="https://www.linkedin.com/in/rohitsingh1206"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+    <DarkAuroraBackground>
+      <div className="min-h-screen flex items-center justify-center px-6 py-12 text-white">
+        <motion.div
+          className="w-full max-w-xl rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-lg p-8 space-y-6"
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+        >
+          <motion.h1
+            className="text-4xl font-bold tracking-tight text-center"
+            custom={0}
+            variants={fadeUp}
           >
-            LinkedIn
-          </a>
-          {/* <a
-            href="https://github.com/rohitsinghnaruka"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-900 transition"
+            <ShinyText speed={2.5}>Contact Me</ShinyText>
+          </motion.h1>
+
+          <motion.p
+            className="text-lg text-blue-300 text-center"
+            custom={1}
+            variants={fadeUp}
           >
-            GitHub
-          </a> */}
-          <a
-            href="mailto:rohitnaruka6852@gmail.com"
-            className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition"
+            Feel free to reach out via email or connect on platforms below.
+          </motion.p>
+
+          <motion.div
+            className="flex flex-col sm:flex-row justify-center gap-4 pt-4"
+            custom={2}
+            variants={fadeUp}
           >
-            Email Me
-          </a>
-        </div>
+            <a
+              href="https://www.linkedin.com/in/omtayade86"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-blue-300 hover:text-white font-semibold py-2 px-6 rounded-xl shadow-md transition backdrop-blur-md"
+            >
+              <Linkedin size={18} />
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              href="https://github.com/om-tayade-1920"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-blue-300 hover:text-white font-semibold py-2 px-6 rounded-xl shadow-md transition backdrop-blur-md"
+            >
+              <Github size={18} />
+              <span>GitHub</span>
+            </a>
+
+            <a
+              href="mailto:omtayade86@gmail.com"
+              className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-blue-300 hover:text-white font-semibold py-2 px-6 rounded-xl shadow-md transition backdrop-blur-md"
+            >
+              <Mail size={18} />
+              <span>Email Me</span>
+            </a>
+          </motion.div>
+        </motion.div>
       </div>
-    </div>
+    </DarkAuroraBackground>
   );
 };
 

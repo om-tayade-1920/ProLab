@@ -1,0 +1,28 @@
+.shiny-text {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    #6b46c1,
+    #9f7aea,
+    #62b6fa,     /* ✨ Replaced yellow with soft cyan */
+    #9f7aea,
+    #6b46c1
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 5s infinite linear; /* ⏱ 3s duration */
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
