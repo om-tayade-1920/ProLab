@@ -1,34 +1,46 @@
 import dotenv from 'dotenv';
 dotenv.config();
-const PORT = process.env.PORT;
+
+const PORT = process.env.PORT || 5000;
 const DB_URL = process.env.MONGO_URI;
-import connectDB from './config/connectDB.js';
-connectDB(DB_URL);
+
 import express from 'express';
 const app = express();
+
 import cors from 'cors';
-import userRouter from './routes/userRoute.js';
-import errorMiddleware from './middleware/errorMiddleware.js';
+import connectDB from './config/connectDB.js';
 import cookieParser from 'cookie-parser';
-import blogRouter from './routes/blogRoute.js';
 
-import commentRouter from './routes/commentRoute.js';
+// Routes
+import userRouter from './routes/userRoute.js';
+import projectRouter from './routes/projectRoute.js'; 
+import errorMiddleware from './middleware/errorMiddleware.js';
 
+//  Connect to MongoDB
+connectDB(DB_URL);
 
+//  Middlewares
 app.use(express.json());
 app.use(cookieParser());
-
 app.use(cors({
-  origin: 'https://interview-experience-vnit.vercel.app',
+  origin: ['http://localhost:5173', 'http://localhost:3000'], // Adjust for frontend port
   credentials: true,
 }));
 
+//  Route Setup
 app.use('/api/user', userRouter);
-app.use('/api/blog', blogRouter);
-app.use('/api/comment', commentRouter);
+app.use('/api/project', projectRouter);   
 
+
+//  Root API Test Route
+app.get('/', (req, res) => {
+  res.send("🎯 Project Repository API is running...");
+});
+
+//  Error Handling Middleware
 app.use(errorMiddleware);
 
+//  Start Server
 app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+  console.log(`🚀 Server is running at http://localhost:${PORT}`);
 });
