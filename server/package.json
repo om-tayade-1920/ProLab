@@ -1,5 +1,5 @@
 {
-  "name": "fullstack-mern-blog-app",
+  "name": "ProLab-app",
   "version": "1.0.0",
   "description": "mern blog ",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "start": "node index.js",
     "build": "npm install && npm install --prefix client && npm run build --prefix client"
   },
-  "author": "Rakesh Kumar Parida",
+  "author": "Om Rajesh Tayade",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
