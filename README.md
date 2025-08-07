@@ -107,7 +107,6 @@ ProLab is designed to be a one-stop platform for VNIT students to showcase and d
 
 ---
 
-## Environment Variables
 
-Create a `.env` file at your project root with:
+
 
