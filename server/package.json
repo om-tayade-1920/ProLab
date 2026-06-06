@@ -1,7 +1,7 @@
 {
   "name": "ProLab-app",
   "version": "1.0.0",
-  "description": "mern blog ",
+  "description": "A Project Sharing Application",
   "main": "index.js",
   "type": "module",
   "scripts": {
