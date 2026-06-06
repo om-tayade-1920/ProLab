@@ -76,7 +76,7 @@ ProLab is designed to be a one-stop platform for VNIT students to showcase and d
 | `screenshots`| [String]     | URLs of uploaded screenshots                 |
 | `likes`      | Number       | Count of “likes” received                    |
 | `postedBy`   | ObjectId     | Reference to User who created the project    |
-| `createdAt`  | Date         | Timestamp(createdAt,updatedAt)                                   |
+| `createdAt`  | Date         | Timestamp (createdAt,updatedAt)              |
 
 ---
 
