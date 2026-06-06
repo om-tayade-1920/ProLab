@@ -28,8 +28,8 @@ app.use(cors({
 }));
 
 //  Route Setup
-app.use('/api/user', userRouter);
-app.use('/api/project', projectRouter);   
+app.use('/user', userRouter);
+app.use('/project', projectRouter);   
 
 
 //  Root API Test Route
