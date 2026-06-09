@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const blogSchema = new mongoose.Schema({
+const ProjectSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -66,6 +66,6 @@ const blogSchema = new mongoose.Schema({
 },
     { timestamps: true }
 );
-const blogModel = mongoose.model('blog', blogSchema);;
+const ProjectModel = mongoose.model('Project', ProjectSchema);;
 
-export default blogModel;
+export default ProjectModel;
