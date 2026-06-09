@@ -1,6 +1,6 @@
 import errorHandler from "../utils/errorHandler.js";
 import asyncHandler from 'express-async-handler';
-import projectModel from "../model/projectModel.js"; // still named blogModel
+import projectModel from "../model/projectModel.js"; 
 import userModel from '../model/userModel.js';
 
 //  Get All Projects (with filters)
